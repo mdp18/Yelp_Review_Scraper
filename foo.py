@@ -6,8 +6,8 @@ import pandas as pd
 x = 0
 filename = "datasets.csv"  # saving data as csv
 f = open(filename, "w")
-headers = "Review_Body\n"  # these are the features that are scraped
-f.write(headers)
+#headers = "Review_Body"  # these are the features that are scraped
+#f.write(headers)
 dict = {}
 counter = 0
 
@@ -37,6 +37,10 @@ for _ in range(4):  # regex could have been used here but this is to increment t
         #print(type(review))
         #print(strReview)
         formatStrReview = strReview[14:] #cuts beginning javascript syntax from review, needs work
+        formatStrReview = formatStrReview.replace("<br/>","")
+        formatStrReview = formatStrReview.replace("¬†", "") # I can't remove this syntax for some reason
+        formatStrReview = formatStrReview.replace("</p>", "")
+        formatStrReview = formatStrReview.replace("‚Äã", "")
         dict[counter] = formatStrReview #fills python dictionary
         counter = counter + 1
         #print(strReview.rindex("a"))
